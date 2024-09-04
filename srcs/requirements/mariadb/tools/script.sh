@@ -1,6 +1,7 @@
 #!/bin/bash
 
-create_sql_file() {
+create_sql_file()
+{
 	cat << EOF > bootstrap.sql
 	FLUSH PRIVILEGES;
 	CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\`;
