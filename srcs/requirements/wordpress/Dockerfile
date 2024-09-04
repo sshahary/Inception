@@ -5,23 +5,25 @@
 #                                                     +:+ +:+         +:+      #
 #    By: sshahary <sshahary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/09/03 12:00:57 by sshahary          #+#    #+#              #
-#    Updated: 2024/09/03 12:00:58 by sshahary         ###   ########.fr        #
+#    Created: 2024/09/03 15:36:40 by sshahary          #+#    #+#              #
+#    Updated: 2024/09/03 15:42:23 by sshahary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FROM debian:buster
 
-RUN apt -y update && apt -y upgrade && apt install -y nginx openssl
+RUN apt update && apt install -y php-fpm php-mysql curl && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /etc/nginx/ssl
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+	chmod +x wp-cli.phar && \
+	mv wp-cli.phar /usr/local/bin/wp
 
-RUN openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/nginx/ssl/inception.key -subj "/C=DE/ST=Baden Wurttemberg/L=Heilbronn/O=42 Heilbronn/CN=sshahry.42.fr"
+RUN sed -i 's/listen = \/run\/php\/php7.3-fpm.sock/listen = 9000/g' /etc/php/7.3/fpm/pool.d/www.conf && \
+	mkdir -p /run/php /var/www /var/log/php
 
-RUN mkdir -p /var/run/nginx
+COPY ./tools/script.sh /usr/local/bin/wordpress_conf.sh
+RUN chmod +x /usr/local/bin/wordpress_setup.sh
 
-COPY conf/nginx.conf /etc/nginx/nginx.conf
+EXPOSE 9000
 
-EXPOSE 443
-
-CMD [ "nginx", "-g", "daemon off;" ]
+CMD [ "/usr/local/bin/wordpress_conf.sh" ]
