@@ -6,7 +6,7 @@
 #    By: sshahary <sshahary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/03 15:36:40 by sshahary          #+#    #+#              #
-#    Updated: 2024/09/03 15:42:23 by sshahary         ###   ########.fr        #
+#    Updated: 2024/09/05 13:27:45 by sshahary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 RUN sed -i 's/listen = \/run\/php\/php7.3-fpm.sock/listen = 9000/g' /etc/php/7.3/fpm/pool.d/www.conf && \
 	mkdir -p /run/php /var/www /var/log/php
 
-COPY ./tools/script.sh /usr/local/bin/wordpress_conf.sh
+COPY ./tools/script.sh /usr/local/bin/wordpress_setup.sh
 RUN chmod +x /usr/local/bin/wordpress_setup.sh
 
 EXPOSE 9000
