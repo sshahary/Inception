@@ -6,7 +6,7 @@
 #    By: sshahary <sshahary@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/03 15:36:40 by sshahary          #+#    #+#              #
-#    Updated: 2024/09/05 13:27:45 by sshahary         ###   ########.fr        #
+#    Updated: 2024/09/05 13:29:25 by sshahary         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,4 +26,4 @@ RUN chmod +x /usr/local/bin/wordpress_setup.sh
 
 EXPOSE 9000
 
-CMD [ "/usr/local/bin/wordpress_conf.sh" ]
+CMD [ "/usr/local/bin/wordpress_setup.sh" ]
