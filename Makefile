@@ -41,8 +41,8 @@ fclean: down clean
 
 reset: fclean
 	@echo "Resetting project data..."
-	@rm -rf /home/rpambhar/data/mariadb /home/rpambhar/data/wordpress
-	@mkdir /home/rpambhar/data/mariadb /home/rpambhar/data/wordpress
+	@rm -rf /home/sshahary/data/mariadb /home/sshahary/data/wordpress
+	@mkdir /home/sshahary/data/mariadb /home/sshahary/data/wordpress
 
 help:
 	@echo "Available targets:"
